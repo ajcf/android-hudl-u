@@ -2,6 +2,8 @@ package cadwell_frost.amanda.hudlu;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -14,8 +16,9 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
-        public MyViewHolder(TextView itemView) {
-            super(itemView);
+        public MyViewHolder(View view) {
+            super(view);
+            mTextView = (TextView) view.findViewById(R.id.my_text_view);
         }
     }
 
@@ -27,7 +30,10 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View v = LayoutInflater.from(parent.getContext())
+                               .inflate(R.layout.my_text_view, parent, false);
+        MyViewHolder vh = new MyViewHolder(v);
+        return vh;
     }
 
     @Override
