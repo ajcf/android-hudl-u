@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+    private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
+    private MyRecyclerAdapter myRecyclerAdapter;
+
+    private final String[] myDataset = new String[]{"Maplenut", "Annasette", "Jumper",
+            "Kitwit", "Valentine", "Sashi", "Starlite", "October", "Babes",
+            "Creama di Leema", "Mocha", "Guido", "Bryn"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +36,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recycler);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+
+        myRecyclerAdapter = new MyRecyclerAdapter(this, myDataset);
+        mRecyclerView.setAdapter(myRecyclerAdapter);
+
     }
 
     @Override
