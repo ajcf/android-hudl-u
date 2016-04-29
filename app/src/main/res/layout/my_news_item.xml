@@ -3,19 +3,35 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:padding="@dimen/cardview_default_elevation"
     android:layout_margin="@dimen/cardview_default_elevation">
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/item_image"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/icon_hudllogo"  />
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/action_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/action_favorite"
+                android:layout_alignParentRight="true"/>
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:adjustViewBounds="true" />
+
+
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/item_title"

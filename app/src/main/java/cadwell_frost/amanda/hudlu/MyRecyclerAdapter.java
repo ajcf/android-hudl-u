@@ -78,7 +78,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
                 public void onResponse(Bitmap response) {
                     holder.mImageView.setImageBitmap(response);
                 }
-            }, 0, 0, ImageView.ScaleType.FIT_XY, Bitmap.Config.ALPHA_8,
+            }, 0, 0, ImageView.ScaleType.CENTER_CROP, Bitmap.Config.ALPHA_8,
             new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
