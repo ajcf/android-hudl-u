@@ -1,11 +1,16 @@
 package cadwell_frost.amanda.hudlu;
 
+import android.app.AlertDialog;
+import android.app.DialogFragment;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -62,7 +67,20 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter
         myRecyclerAdapter = new MyRecyclerAdapter(this, mNewsItems);
         mRecyclerView.setAdapter(myRecyclerAdapter);
 
+        SharedPreferences prefs = getSharedPreferences("HudlUAndroidPrefs", Context.MODE_PRIVATE);
+        Boolean firstRun = prefs.getBoolean("FirstRun", true);
+        if (firstRun) {
+            SharedPreferences.Editor prefsEditor = prefs.edit();
+            prefsEditor.putBoolean("FirstRun", false);
+            prefsEditor.apply();
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage(R.string.welcome_message);
+            builder.create().show();
+        }
+
         fetchLatestNews();
+
     }
 
     @Override
@@ -80,7 +98,7 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_favorites) {
             Log.d("HudlU", "Settings menu item clicked.");
             return true;
         }

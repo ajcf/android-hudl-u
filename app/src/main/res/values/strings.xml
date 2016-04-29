@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">HudlU</string>
     <string name="action_settings">Settings</string>
+    <string name="welcome_message">\"Welcome to Homework 4!\"</string>
+    <string name="ok">Ok</string>
+    <string name="action_favorites">Favorites</string>
 </resources>
