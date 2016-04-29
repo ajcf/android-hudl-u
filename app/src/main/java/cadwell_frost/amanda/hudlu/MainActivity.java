@@ -111,6 +111,22 @@ public class MainActivity extends AppCompatActivity implements MyRecyclerAdapter
         Snackbar.make(view, mNewsItems.get(position).author, Snackbar.LENGTH_SHORT).show();
     }
 
+    @Override
+    public void onFavoriteClicked(View view, int position) {
+        MashableNewsItem newsItem = mNewsItems.get(position);
+        if (FavoriteUtil.isFavorite(this, newsItem))
+        {
+            FavoriteUtil.removeFavorite(this, newsItem);
+            view.findViewById(R.id.action_favorite).setBackgroundResource(R.color.cardview_light_background);
+        }
+        else
+        {
+            FavoriteUtil.addFavorite(this, newsItem);
+            view.findViewById(R.id.action_favorite).setBackgroundResource(R.color.orange);
+        }
+
+    }
+
     public void fetchLatestNews(){
         ConnectivityManager cm =
                 (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

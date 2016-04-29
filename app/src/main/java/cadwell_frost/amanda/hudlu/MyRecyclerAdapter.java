@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,16 +34,19 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
     private List<MashableNewsItem> mNewsItems;
     private OnAdapterInteractionListener mListener;
     private RequestQueue mRequestQueue;
+    private Context mContext;
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView mItemTitle;
         public TextView mAuthorView;
         public ImageView mImageView;
+        public Button mFavoriteButton;
         public MyViewHolder(View view) {
             super(view);
             mItemTitle = (TextView) view.findViewById(R.id.item_title);
             mAuthorView = (TextView) view.findViewById(R.id.item_author);
             mImageView = (ImageView) view.findViewById(R.id.item_image);
+            mFavoriteButton = (Button) view.findViewById(R.id.action_favorite);
         }
     }
 
@@ -51,6 +55,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         mNewsItems = newsItems;
         mListener = (OnAdapterInteractionListener) context;
         mRequestQueue = Volley.newRequestQueue(context);
+        mContext = context;
     }
 
     @Override
@@ -66,12 +71,23 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
         MashableNewsItem newsItem = mNewsItems.get(position);
         holder.mItemTitle.setText(newsItem.title);
         holder.mAuthorView.setText(newsItem.author);
+        if(FavoriteUtil.isFavorite(mContext, newsItem))
+        {
+            holder.mFavoriteButton.setBackgroundResource(R.color.orange);
+        }
         holder.mItemTitle.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 mListener.onItemClicked(v, position);
             }
         });
+        holder.mFavoriteButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                mListener.onFavoriteClicked(v, position);
+            }
+        });
+
         ImageRequest request = new ImageRequest(newsItem.feature_image,
             new Response.Listener<Bitmap>() {
                 @Override
@@ -97,6 +113,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.My
 
     public interface OnAdapterInteractionListener {
         void onItemClicked(View view, int position);
+        void onFavoriteClicked(View view, int position);
     }
 
 }
