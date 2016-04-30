@@ -86,11 +86,6 @@ public class MainActivity extends AppCompatActivity implements MainRecyclerAdapt
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            Log.d("HudlU", "Settings menu item clicked.");
-            return true;
-        }
-
         if (id == R.id.action_favorites) {
             Log.d("HudlU", "Favorites menu item clicked");
 

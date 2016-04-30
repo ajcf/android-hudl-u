@@ -24,7 +24,8 @@
         <activity
             android:name=".FavoritesActivity"
             android:label="Favorites"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".MainActivity">
         </activity>
     </application>
 </manifest>
