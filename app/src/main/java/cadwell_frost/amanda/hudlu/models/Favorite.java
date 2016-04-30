@@ -46,7 +46,7 @@ public class Favorite extends RealmObject {
         _link = link;
     }
 
-    public String link()
+    public String getLink()
     {
         return _link;
     }
