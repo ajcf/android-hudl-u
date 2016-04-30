@@ -6,9 +6,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -106,7 +106,19 @@ public class MainActivity extends AppCompatActivity implements MainRecyclerAdapt
     @Override
     public void onItemClicked(View view, int position) {
         Log.d("HudlU", "News item clicked");
-        Snackbar.make(view, mNewsItems.get(position).author, Snackbar.LENGTH_SHORT).show();
+        String url = mNewsItems.get(position).link;
+        if (url != null)
+        {
+            Uri webpage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "Article is invalid", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

@@ -1,10 +1,9 @@
 package cadwell_frost.amanda.hudlu;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +85,19 @@ public class FavoritesActivity extends AppCompatActivity implements FavoritesRec
     @Override
     public void onItemClicked(View view, int position) {
         Log.d("HudlU", "Favorite item clicked");
-        Snackbar.make(view, mNewsItems.get(position).author, Snackbar.LENGTH_SHORT).show();
+        String url = mNewsItems.get(position).link;
+        if (url != null)
+        {
+            Uri webpage = Uri.parse(url);
+            Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+            if (intent.resolveActivity(getPackageManager()) != null) {
+                startActivity(intent);
+            }
+        }
+        else
+        {
+            Toast.makeText(this, "Article is invalid", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
