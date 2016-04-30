@@ -123,12 +123,12 @@ public class MainActivity extends AppCompatActivity implements MainRecyclerAdapt
         if (FavoriteUtil.isFavorite(this, newsItem))
         {
             FavoriteUtil.removeFavorite(this, newsItem);
-            view.findViewById(R.id.action_favorite).setBackgroundResource(R.color.cardview_light_background);
+            view.findViewById(R.id.action_favorite).setBackgroundColor(0xFFE8E8E8);
         }
         else
         {
             FavoriteUtil.addFavorite(this, newsItem);
-            view.findViewById(R.id.action_favorite).setBackgroundResource(R.color.orange);
+            view.findViewById(R.id.action_favorite).setBackgroundColor(0xFFFF6600);
         }
     }
 
